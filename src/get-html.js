@@ -30,7 +30,7 @@ const getHtml = async (baseURL, path, page, option) => {
     if (url !== (baseURL + path)) { // url变化了 代表页面重定向了
       promise.redirect = true
     }
-    // page.close()
+    page.close()
     return promise
   } catch (e) {
     console.log(e)
