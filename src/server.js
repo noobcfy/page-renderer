@@ -7,9 +7,15 @@ const broswerCreator = require('./renderer')
 const getHtml = require('./get-html')
 const writeFile = require('./file/htmlFileWrite')
 const send = require('koa-send')
-const initOptions = require('./options')
+let initOptions = require('./options')
 const portfinder = require('portfinder')
-
+// 合并业务配置
+try {
+  const userOptions = require(process.cwd() + '/rendererOptions.js')
+  if (userOptions) initOptions = Object.assign(initOptions, userOptions)
+} catch (e) {
+  console.log('未找到配置模块renderOptions.js,应用默认配置！')
+}
 const serverInit = async () => {
   let options = Object.assign({}, initOptions)
   if (!options.staticPort) {
