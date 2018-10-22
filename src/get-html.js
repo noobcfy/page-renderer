@@ -17,7 +17,7 @@ const getHtml = async (baseURL, path, page, option) => {
       console.log(e)
     })
     await page.addScriptTag({
-      content: `var PRERENDER = true`
+      content: `window.PRERENDER = true`
     })
     let url = page.url()
     let content = await page.content()
