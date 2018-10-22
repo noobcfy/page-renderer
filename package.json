@@ -1,5 +1,5 @@
 {
-  "name": "page-renderer",
+  "name": "isesol-renderer",
   "version": "1.0.0",
   "description": "A tool server to render a static html file。",
   "main": "index.js",
