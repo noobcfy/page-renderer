@@ -2,7 +2,7 @@
 const options = {
   staticPort: '', // 静态文件服务器端口,可不传自动查询可用端口
   serverPort: 9000, // 渲染服务器端口
-  routes: ['/news'],      // 渲染页面路径path 默认全部
+  routes: [],      // 渲染页面路径path 默认全部
   initRender: [],     // 初始化渲染的页面path
   renderBrowserOptions: {},  // 渲染browser设置想参加puppeteer.browser配置
   minifyHtml: true,  // 压缩html
