@@ -18,7 +18,7 @@ const needPrerender = function () {
   if (!window) {
     return true
   }
-  if (window.navigator.userAgent.includes('PRERENDER') || window.PRERENDER) {
+  if (window.navigator.userAgent.includes('PRERENDER') || !window.PRERENDER) {
     return true
   }
   return false
