@@ -6,18 +6,28 @@ const getHtml = async (baseURL, path, page, option) => {
     if (typeof options.handlePageBefore === 'function') {
       await options.handlePageBefore(page)
     }
-
+    // 打开页面
     await page.goto(baseURL + path, {waitUntil: options.waitUntil})
-
+    // 页面延时
     await page.evaluate(options => {
-      return new Promise((resolve, reject) => (
+      return new Promise((resolve, reject) => {
         setTimeout(() => resolve(), options.renderAfterTime || 100)
-      ))
+      })
     }, options).catch(e => {
       console.log(e)
     })
+    // 渲染数据获取并写入页面window对象
+    await page.evaluate(() => {
+      let data = JSON.stringify(window.PRERENDER_DATA)
+      let htmlstr = `window.PRERENDER_DATA = ${data}`
+      let script = document.createElement('script')
+      script.type = 'text/javascript'
+      script.innerHTML = htmlstr
+      document.getElementsByTagName('head')[0].appendChild(script)
+    })
+    // 增加渲染标记
     await page.addScriptTag({
-      content: `window.PRERENDER = true`
+      content: `window.PRERENDER = true;`
     })
     let url = page.url()
     let content = await page.content()
