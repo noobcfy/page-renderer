@@ -6,6 +6,8 @@ const getHtml = async (baseURL, path, page, option) => {
     if (typeof options.handlePageBefore === 'function') {
       await options.handlePageBefore(page)
     }
+    // 增加页面渲染标记
+    await page.setUserAgent('PRERENDER')
     // 打开页面
     await page.goto(baseURL + path, {waitUntil: options.waitUntil})
     // 页面延时
@@ -41,7 +43,7 @@ const getHtml = async (baseURL, path, page, option) => {
     if (url !== (baseURL + path)) { // url变化了 代表页面重定向了
       promise.redirect = true
     }
-    page.close()
+    // page.close()
     return promise
   } catch (e) {
     console.log(e)

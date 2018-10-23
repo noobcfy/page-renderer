@@ -14,14 +14,25 @@ const setPrerenderData = function (key, val) {
     window.PRERENDER_DATA[key] = val
   }
 }
+const needPrerender = function () {
+  if (!window) {
+    return true
+  }
+  if (window.navigator.userAgent.includes('PRERENDER')) {
+    return true
+  }
+  return false
+}
 
 const install = function (Vue) {
   Vue.prototype.getPrerenderData = getPrerenderData
   Vue.prototype.setPrerenderData = setPrerenderData
+  Vue.prototype.needPrerender = needPrerender
 }
 
 module.exports = {
   getPrerenderData,
   setPrerenderData,
+  needPrerender
   install
 }
