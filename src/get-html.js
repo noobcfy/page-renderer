@@ -18,17 +18,18 @@ const getHtml = async (baseURL, path, page, option) => {
     })
     // 渲染数据获取并写入页面window对象
     await page.evaluate(() => {
+      if (document.getElementById('PRERENDER')) {
+        document.getElementsByTagName('head')[0].removeChild(document.getElementById('PRERENDER'))
+      }
       let data = JSON.stringify(window.PRERENDER_DATA)
-      let htmlstr = `window.PRERENDER_DATA = ${data}`
+      let htmlstr = `window.PRERENDER_DATA = ${data};window.PRERENDER = true;`
       let script = document.createElement('script')
       script.type = 'text/javascript'
+      script.id = 'PRERENDER'
       script.innerHTML = htmlstr
       document.getElementsByTagName('head')[0].appendChild(script)
     })
-    // 增加渲染标记
-    await page.addScriptTag({
-      content: `window.PRERENDER = true;`
-    })
+
     let url = page.url()
     let content = await page.content()
     // 压缩html代码
