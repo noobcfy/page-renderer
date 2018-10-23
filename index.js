@@ -33,6 +33,6 @@ const install = function (Vue) {
 module.exports = {
   getPrerenderData,
   setPrerenderData,
-  needPrerender
+  needPrerender,
   install
 }
