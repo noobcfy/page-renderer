@@ -1,4 +1,4 @@
-#! node
+#!/usr/bin/env node
 const Koa = require('koa')
 const path = require('path')
 // const querystring = require('querystring')
