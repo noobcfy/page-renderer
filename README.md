@@ -12,7 +12,7 @@
     npm run render-server
     
 ## 配置
-
+业务模块可在根目录新建 rendererOptions.js 导出一个options对象可对如下配置进行复写
 ```js
 const options = {
   staticPort: '', // 静态文件服务器端口,可不传自动查询可用端口
