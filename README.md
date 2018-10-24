@@ -5,8 +5,7 @@
 
 ## 安装
 
-    npm i git+ssh://git@git.dev:isesol_web_fe/isesol_renderer.git
-
+    npm i git+https://github.com/CaoFeiYu/page-renderer.git#develop
 ## 启动
 
     npm run render-server
